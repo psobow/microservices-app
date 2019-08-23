@@ -1,5 +1,6 @@
-package com.sobow.credit.microservice.domain;
+package com.sobow.credit.microservice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Credit
 {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(unique = true)
   private long id;
   
   @NotEmpty(message = "Credit name cannot be null or empty")

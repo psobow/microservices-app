@@ -1,7 +1,6 @@
 package com.sobow.credit.microservice.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,14 +11,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductDto
+public class CreditDataDto
 {
-  @Min(value = 0, message = "ID cannot be negative number")
-  private long creditId;
-  
-  @NotEmpty
-  private String productName;
-  
+  @Valid
   @NotNull
-  private Integer value;
+  private CustomerDto customerDto;
+  
+  @Valid
+  @NotNull
+  private ProductDto productDto;
+  
+  @Valid
+  @NotNull
+  private CreditDto creditDto;
 }
