@@ -2,6 +2,7 @@ package com.sobow.credit.microservice.repository;
 
 import com.sobow.credit.microservice.model.Credit;
 import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ public interface CreditRepository extends CrudRepository<Credit, Long>
   @SuppressWarnings("unchecked")
   Credit save(final Credit credit);
   
+  Optional<Credit> findByCreditName(final String creditName);
 }

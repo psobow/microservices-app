@@ -22,22 +22,22 @@ public class CustomerClient
 {
   private final RestTemplate restTemplate;
   private final Gson gson = new Gson();
-  private final URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8081/v1/customers")
-                                              .build()
-                                              .encode()
-                                              .toUri();
+  private final URI customerMicroServiceURL = UriComponentsBuilder.fromHttpUrl("http://localhost:8081/v1/customers")
+                                                                  .build()
+                                                                  .encode()
+                                                                  .toUri();
   
   public void postCustomer(CustomerDto customerDto)
   {
-    HttpEntity<String> request = new HttpEntity<>(gson.toJson(customerDto));
-    restTemplate.postForObject(url, request, Object.class);
+    HttpEntity<String> requestBody = new HttpEntity<>(gson.toJson(customerDto));
+    restTemplate.postForObject(customerMicroServiceURL, requestBody, Object.class);
   }
   
   public List<CustomerDto> getCustomers()
   {
     try
     {
-      CustomerDto[] boardResponse = restTemplate.getForObject(url, CustomerDto[].class);
+      CustomerDto[] boardResponse = restTemplate.getForObject(customerMicroServiceURL, CustomerDto[].class);
       return Arrays.asList(Optional.ofNullable(boardResponse).orElse(new CustomerDto[0]));
     }
     catch (RestClientException e)

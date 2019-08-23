@@ -36,17 +36,17 @@ public class CreditController
   @GetMapping
   public List<CreditDataDto> getCredits()
   {
-    List<CreditDto> creditDtos = creditMapper.mapToCreditsDto(dbService.findAllCredits());
+    List<Credit> credits = dbService.findAll();
     List<ProductDto> productDtos = productService.getProducts();
     List<CustomerDto> customerDtos = customerService.getCustomers();
   
-    return compoundData(creditDtos, productDtos, customerDtos);
+    return compoundData(credits, productDtos, customerDtos);
   }
   
   @PostMapping
   public Long CreateCredit(@Valid @RequestBody final CreditDataDto creditDataDto)
   {
-    Credit credit = dbService.saveCredit(creditMapper.mapToCredit(creditDataDto.getCreditDto()));
+    Credit credit = dbService.save(creditMapper.mapToCredit(creditDataDto.getCreditDto()));
     
     ProductDto productDto = creditDataDto.getProductDto();
     productDto.setCreditId(credit.getId());
@@ -59,26 +59,25 @@ public class CreditController
     return credit.getId();
   }
   
-  private List<CreditDataDto> compoundData(List<CreditDto> creditDtos,
+  private List<CreditDataDto> compoundData(List<Credit> credits,
                                            List<ProductDto> productDtos,
                                            List<CustomerDto> customerDtos)
   {
     List<CreditDataDto> result = new ArrayList<>();
     int quantityOfDataToCompound = productDtos.size();
+  
     for (int i = 0; i < quantityOfDataToCompound; i++)
     {
-      CreditDto creditDto = creditDtos.get(i);
-      long creditId = creditDto.getId();
-      
+      long creditId = credits.get(i).getId();
       ProductDto productDto = productDtos.stream()
                                          .filter(productDto1 -> productDto1.getCreditId() == creditId)
                                          .findFirst()
                                          .orElseThrow(NoSuchElementException::new);
-      
       CustomerDto customerDto = customerDtos.stream()
                                             .filter(customerDto1 -> customerDto1.getCreditId() == creditId)
                                             .findFirst()
                                             .orElseThrow(NoSuchElementException::new);
+      CreditDto creditDto = creditMapper.mapToCreditDto(credits.get(i));
       
       CreditDataDto data = new CreditDataDto(customerDto, productDto, creditDto);
       

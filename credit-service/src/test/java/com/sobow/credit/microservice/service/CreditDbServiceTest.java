@@ -18,7 +18,7 @@ public class CreditDbServiceTest
   @Test
   public void databaseTest()
   {
-    List<Credit> credits = dbService.findAllCredits();
+    List<Credit> credits = dbService.findAll();
     
     System.out.println("\nCredits size: " + credits.size() + '\n');
   }
@@ -27,8 +27,8 @@ public class CreditDbServiceTest
   public void clearDb()
   {
     dbService.deleteAll();
-    
-    List<Credit> credits = dbService.findAllCredits();
+  
+    List<Credit> credits = dbService.findAll();
     
     System.out.println("\nCredits size after delete all: " + credits.size() + '\n');
   }
