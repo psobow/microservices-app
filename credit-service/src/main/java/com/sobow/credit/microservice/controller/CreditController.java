@@ -12,6 +12,7 @@ import com.sobow.credit.microservice.service.ProductService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,7 +47,8 @@ public class CreditController
   }
   
   @PostMapping
-  public Long CreateCredit(@Valid @RequestBody final CreditDataDto creditDataDto)
+  @Transactional
+  public Long createCredit(@Valid @RequestBody final CreditDataDto creditDataDto)
   {
     Credit credit = dbService.save(creditMapper.mapToCredit(creditDataDto.getCreditDto()));
     
@@ -62,6 +64,7 @@ public class CreditController
   }
   
   @DeleteMapping("/{id}")
+  @Transactional
   public void deleteCredit(@PathVariable("id") final Long creditId)
   {
     dbService.deleteById(creditId);

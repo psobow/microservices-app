@@ -24,3 +24,19 @@ GRANT ALL ON inteca_db_product.* TO 'inteca_user_product'@'localhost';
 
 http://localhost:8081/v1/customers
 http://localhost:8082/v1/products
+
+
+//////////////////////////////////////////
+
+Waliduje dane wejściowe odrazu w pierwszym serwisie. Ułatwia to życia ponieważ odrazu wiem czy dane są dobre cz nie,
+i nie musze się martwić tym że jak gdzieś dalej w kolejnym micro serwisie okaże się że dane są złe i wszystko trzeba było by rollbackować.
+
+Nie widzę prostego rozwiązania na usunięcie propercji creditId z JSON'a który zwraca mój CreditController z metody getCredits
+
+UCO2:
+punkt 3. Komponent Credit wywołuje usługę GetCustomers komponentu Customer i przekazuje numery kredytów, dla których należy zwrócić klientów
+
+nie wiem jak to można zrobić mądrze... w żadniu GET nie widzę sensu żeby wysyłać requestBody, tak sie raczej nie robi.
+
+z drugiej strony gdybym chciał podać te ID w pathie w URL no to co w przypadku gdy miałbym miliard ID ?
+(nie wiem nawet jak można obsłużyć dynamiczną ilość argumentów w pathie w urlu)

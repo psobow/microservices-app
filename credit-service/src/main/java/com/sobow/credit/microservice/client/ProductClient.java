@@ -24,10 +24,9 @@ public class ProductClient
 {
   private final RestTemplate restTemplate;
   private final Gson gson = new Gson();
-  private final URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl("http://localhost:8082/v1/products")
-                                                                 .build()
-                                                                 .encode()
-                                                                 .toUri();
+  private final String productServicePort = "8082";
+  private final URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
+      "http://localhost:" + productServicePort + "/v1/products").build().encode().toUri();
   
   public void postProduct(final ProductDto productDto)
   {

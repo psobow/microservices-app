@@ -24,10 +24,9 @@ public class CustomerClient
 {
   private final RestTemplate restTemplate;
   private final Gson gson = new Gson();
-  private final URI customerMicroServiceURL = UriComponentsBuilder.fromHttpUrl("http://localhost:8081/v1/customers")
-                                                                  .build()
-                                                                  .encode()
-                                                                  .toUri();
+  private final String customerServicePort = "8081";
+  private final URI customerMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
+      "http://localhost:" + customerServicePort + "/v1/customers").build().encode().toUri();
   
   public void postCustomer(final CustomerDto customerDto)
   {
