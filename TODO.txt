@@ -1,15 +1,24 @@
 // \connect root@localhost
     \sql
-
 // mysql -u root -p
 
 CREATE DATABASE IF NOT EXISTS inteca_db_credit;
 CREATE USER IF NOT EXISTS 'inteca_user_credit'@'localhost' IDENTIFIED BY 'inteca_user_credit';
 ALTER USER 'inteca_user_credit'@'localhost' IDENTIFIED WITH mysql_native_password BY 'inteca_user_credit';
-
 GRANT ALL ON inteca_db_credit.* TO 'inteca_user_credit'@'localhost';
 
-// Jak ukryje ID w w CreditDto to jak wtedy poradzić sobie z mapowaniem ?
+
+CREATE DATABASE IF NOT EXISTS inteca_db_customer;
+CREATE USER IF NOT EXISTS 'inteca_user_customer'@'localhost' IDENTIFIED BY 'inteca_user_customer';
+ALTER USER 'inteca_user_customer'@'localhost' IDENTIFIED WITH mysql_native_password BY 'inteca_user_customer';
+GRANT ALL ON inteca_db_customer.* TO 'inteca_user_customer'@'localhost';
+
+
+CREATE DATABASE IF NOT EXISTS inteca_db_product;
+CREATE USER IF NOT EXISTS 'inteca_user_product'@'localhost' IDENTIFIED BY 'inteca_user_product';
+ALTER USER 'inteca_user_product'@'localhost' IDENTIFIED WITH mysql_native_password BY 'inteca_user_product';
+GRANT ALL ON inteca_db_product.* TO 'inteca_user_product'@'localhost';
+
 
 
 

@@ -27,8 +27,7 @@ public class CustomerMapper
     return new Customer(id,
                         customerDto.getCreditId(),
                         customerDto.getFirstName(),
-                        customerDto.getPesel(),
-                        customer.getSurname());
+                        customerDto.getPesel(), customerDto.getSurname());
   }
   
   public CustomerDto mapToCustomerDto(final Customer customer)

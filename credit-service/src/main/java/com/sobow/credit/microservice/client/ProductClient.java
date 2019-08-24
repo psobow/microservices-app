@@ -10,6 +10,8 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -29,7 +31,9 @@ public class ProductClient
   
   public void postProduct(ProductDto productDto)
   {
-    HttpEntity<String> requestBody = new HttpEntity<>(gson.toJson(productDto));
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> requestBody = new HttpEntity<>(gson.toJson(productDto), headers);
     restTemplate.postForObject(productMicroServiceURL, requestBody, Object.class);
   }
   
