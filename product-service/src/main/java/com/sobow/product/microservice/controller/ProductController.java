@@ -5,7 +5,9 @@ import com.sobow.product.microservice.mapper.ProductMapper;
 import com.sobow.product.microservice.service.ProductDbService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +32,11 @@ public class ProductController
   public void createProduct(@RequestBody final ProductDto productDto)
   {
     dbService.save(productMapper.mapToProduct(productDto));
+  }
+  
+  @DeleteMapping("/{creditId}")
+  public void deleteProduct(@PathVariable("creditId") final Long creditId)
+  {
+    dbService.deleteByCreditId(creditId);
   }
 }

@@ -19,4 +19,6 @@ public interface ProductRepository extends CrudRepository<Product, Long>
   Product save(final Product product);
   
   Optional<Product> findByCreditIdAndProductNameAndValue(Long creditId, String productName, Integer value);
+  
+  void deleteByCreditId(final Long creditId);
 }

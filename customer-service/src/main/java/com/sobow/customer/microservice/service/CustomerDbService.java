@@ -30,4 +30,9 @@ public class CustomerDbService
   {
     return customerRepository.findByCreditIdAndFirstNameAndPeselAndSurname(creditId, firstName, pesel, surname);
   }
+  
+  public void deleteByCreditId(final Long creditId)
+  {
+    customerRepository.deleteByCreditId(creditId);
+  }
 }

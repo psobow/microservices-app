@@ -15,7 +15,9 @@ import java.util.NoSuchElementException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +59,14 @@ public class CreditController
     customerService.postCustomer(customerDto);
     
     return credit.getId();
+  }
+  
+  @DeleteMapping("/{id}")
+  public void deleteCredit(@PathVariable("id") final Long creditId)
+  {
+    dbService.deleteById(creditId);
+    productService.deleteProductByCreditId(creditId);
+    customerService.deleteCustomerByCreditId(creditId);
   }
   
   private List<CreditDataDto> compoundData(List<Credit> credits,

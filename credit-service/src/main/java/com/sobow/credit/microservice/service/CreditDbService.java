@@ -28,6 +28,11 @@ public class CreditDbService
     return creditRepository.findByCreditName(creditName);
   }
   
+  public void deleteById(final Long creditId)
+  {
+    creditRepository.deleteById(creditId);
+  }
+  
   // only for tests purpouse
   void deleteAll()
   {

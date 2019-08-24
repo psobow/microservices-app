@@ -28,4 +28,8 @@ public class ProductDbService
     return productRepository.findByCreditIdAndProductNameAndValue(creditId, productName, value);
   }
   
+  public void deleteByCreditId(final Long creditId)
+  {
+    productRepository.deleteByCreditId(creditId);
+  }
 }

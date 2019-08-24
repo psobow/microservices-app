@@ -21,4 +21,9 @@ public class CustomerService
   {
     return customerClient.getCustomers();
   }
+  
+  public void deleteCustomerByCreditId(final Long creditId)
+  {
+    customerClient.deleteCustomerByCreditId(creditId);
+  }
 }

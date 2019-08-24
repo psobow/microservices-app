@@ -29,7 +29,7 @@ public class ProductClient
                                                                  .encode()
                                                                  .toUri();
   
-  public void postProduct(ProductDto productDto)
+  public void postProduct(final ProductDto productDto)
   {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -49,5 +49,11 @@ public class ProductClient
       log.error(e.getMessage(), e);
       return new ArrayList<>();
     }
+  }
+  
+  public void deleteProductByCreditId(final Long creditId)
+  {
+    String entityUrl = productMicroServiceURL + "/" + creditId.toString();
+    restTemplate.delete(entityUrl);
   }
 }

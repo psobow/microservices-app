@@ -21,4 +21,9 @@ public class ProductService
   {
     return productClient.getProducts();
   }
+  
+  public void deleteProductByCreditId(final Long creditId)
+  {
+    productClient.deleteProductByCreditId(creditId);
+  }
 }

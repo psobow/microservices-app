@@ -22,4 +22,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Long>
                                                                   String firstName,
                                                                   String pesel,
                                                                   String surname);
+  
+  void deleteByCreditId(final Long creditId);
 }
