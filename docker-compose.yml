@@ -1,0 +1,25 @@
+version: '3'
+
+volumes:
+  my-db:
+    driver: local
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: inteca-db
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+    volumes:
+      # execute init script when container start for first time
+      - ./databases-init:/docker-entrypoint-initdb.d
+      # Set up where our data will be persisted <volume-name> : <place on our computer>
+      - ./my-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pw
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3307:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
