@@ -1,25 +1,72 @@
 version: '3'
 
 volumes:
-  my-db:
+  inteca-db:
     driver: local
 
+networks:
+  spring-network:
+    driver: bridge
+
 services:
-  db:
+  inteca-db:
     image: mysql:5.7
     container_name: inteca-db
-    restart: always
+    networks:
+      - spring-network
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
     volumes:
       # execute init script when container start for first time
       - ./databases-init:/docker-entrypoint-initdb.d
-      # Set up where our data will be persisted <volume-name> : <place on our computer>
-      - ./my-db:/var/lib/mysql
+      # Set up where our data will be persisted
+      - ./inteca-db:/var/lib/mysql
+    ports:
+      - '3307:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=pw
+
+
+  credit-service:
+    container_name: credit-service
+    build: ./credit-service
+    working_dir: /credit-service
+    volumes:
+      - ./credit-service:/credit-service
+      - ~/.m2:/root/.m2
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3307:3306'
+      - '8080:8080'
     expose:
-      # Opens port 3306 on the container
-      - '3306'
+      - '8080'
+    networks:
+      - spring-network
+    depends_on:
+      - inteca-db
+    command: mvn clean spring-boot:run
+
+
+  customer-service:
+    container_name: customer-service
+    build: ./customer-service
+    working_dir: /customer-service
+    volumes:
+      - ./customer-service:/customer-service
+      - ~/.m2:/root/.m2
+    networks:
+      - spring-network
+    depends_on:
+      - inteca-db
+    command: mvn clean spring-boot:run
+
+  product-service:
+    container_name: product-service
+    build: ./product-service
+    working_dir: /product-service
+    volumes:
+      - ./product-service:/product-service
+      - ~/.m2:/root/.m2
+    networks:
+      - spring-network
+    depends_on:
+      - inteca-db
+    command: mvn clean spring-boot:run
+

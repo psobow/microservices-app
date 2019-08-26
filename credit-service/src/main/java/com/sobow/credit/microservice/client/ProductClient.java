@@ -2,11 +2,6 @@ package com.sobow.credit.microservice.client;
 
 import com.google.gson.Gson;
 import com.sobow.credit.microservice.dto.ProductDto;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -17,6 +12,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -26,7 +27,7 @@ public class ProductClient
   private final Gson gson = new Gson();
   private final String productServicePort = "8082";
   private final URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
-      "http://localhost:" + productServicePort + "/v1/products").build().encode().toUri();
+          "http://product-service:" + productServicePort + "/v1/products").build().encode().toUri();
   
   public void postProduct(final ProductDto productDto)
   {
