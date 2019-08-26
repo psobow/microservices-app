@@ -44,7 +44,7 @@ To create new credit we have to send POST request with JSON type request body to
 #### Input restrictions:
 
 - Each property can not be null or empty.
-- **firstName**, **surname** can not contain digits.
+- **firstName**, **surname** can contain only letters.
 - **pesel** must contain exactly eleven digits.
 - **creditName** must be between 1 and 200 characters.
 
@@ -65,7 +65,7 @@ To create new credit we have to send POST request with JSON type request body to
                 "Pattern.java.lang.String",
                 "Pattern"
             ],
-            "defaultMessage": "First name cannot contain digits",
+            "defaultMessage": "First name can contain only letters"",
             "objectName": "creditDataDto",
             "field": "customerDto.firstName",
             "rejectedValue": "Patryk1",
@@ -171,6 +171,8 @@ May be requested only by credit-service, responsible for managing product entity
 
 # Application Testing
 Due to lack of spare time and insufficient knowledge od Docker, I did not manage to implement a satisfactory amount of unit test suites as well as integration test suites. Instead of testing application with JUnit and Mockito library, I decided to use a convenient tool [Postman](https://www.getpostman.com/), which appeared to be the best possible way to test genuine application behavior. 
+
+- You can get my neat postman-test-suite under this [link](https://www.getpostman.com/collections/155d9fd4b82b9288e689) 
 
 
 
