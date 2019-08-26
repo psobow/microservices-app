@@ -1,5 +1,5 @@
 # Project info
-This is a simple application based on micro-services architecture implemented in Java using [Spring boot](https://spring.io/projects/spring-boot) and [MySQL Database](https://www.mysql.com/). Application employ [Maven](https://maven.apache.org/) building tool to compile each micro-service and [Docker Compose](https://docs.docker.com/compose/) to assemble services into fully-working, horizontally scalable backend server. The main feature of the app is to provide access to resources through humble REST API available under URL: `http://localhost:8080/v1/credits` after running the app.
+This is a simple CRUD application based on micro-services architecture implemented in Java using [Spring boot](https://spring.io/projects/spring-boot), [Hibernate](https://hibernate.org/) and [MySQL Database](https://www.mysql.com/). Application employ [Maven](https://maven.apache.org/) building tool to compile each micro-service and [Docker Compose](https://docs.docker.com/compose/) to assemble services into fully-working, horizontally scalable backend server. The main feature of the app is to provide access to resources through humble REST API available under URL: `http://localhost:8080/v1/credits` after running the app.
 
 # Building application
 ### Prerequisites:
@@ -14,7 +14,7 @@ This is a simple application based on micro-services architecture implemented in
 
 # Application workflow
 ## Creating new credit
-To create new credit we have to send POST request with JSON type request body to this URL `http://localhost:8080/v1/credits`.
+In order to create new credit we have to send POST request with JSON type request body to this URL `http://localhost:8080/v1/credits`.
   
 #### Example request body content:
 ```
@@ -44,7 +44,7 @@ To create new credit we have to send POST request with JSON type request body to
 #### Input restrictions:
 
 - Each property can not be null or empty.
-- **firstName**, **surname** can not contain digits.
+- **firstName**, **surname** can contain only letters.
 - **pesel** must contain exactly eleven digits.
 - **creditName** must be between 1 and 200 characters.
 
@@ -65,7 +65,7 @@ To create new credit we have to send POST request with JSON type request body to
                 "Pattern.java.lang.String",
                 "Pattern"
             ],
-            "defaultMessage": "First name cannot contain digits",
+            "defaultMessage": "First name can contain only letters"",
             "objectName": "creditDataDto",
             "field": "customerDto.firstName",
             "rejectedValue": "Patryk1",
@@ -80,7 +80,7 @@ To create new credit we have to send POST request with JSON type request body to
   
 
 ## Retrieving data from the database
-To retrieve data from the database you should send GET request to this URL `http://localhost:8080/v1/credits`.
+In order to retrieve data from the database you should send GET request to this URL `http://localhost:8080/v1/credits`.
 
 #### Example server response:
 
@@ -110,21 +110,21 @@ To retrieve data from the database you should send GET request to this URL `http
 
 
 ## Deleting data from the database
-To delete data from data base you should send DELETE request to this URL `http://localhost:8080/v1/credits/ID` where `ID` is path variable respondent to ID of credit which is going to be deleted.
+In order to delete credit from databases you should send DELETE request to this URL `http://localhost:8080/v1/credits/ID` where `ID` is path variable respondent to ID of credit which is going to be deleted.
 
 #### example server response: 
 none
 
 
 # Architecture details
-Inside the application, we may distinguish three independent micro-services such as credit-service, customer-service, and product-service each of them is responsible for managing certain data.
+Inside the application, we may distinguish three micro-services such as credit-service, customer-service, and product-service each of them is responsible for managing certain data.
 
 ### Credit-service
 
-The main part of the application. It's delegate tasks to other services and provides REST API for communication with the app from the outer world. May handle HTTP requests such as: 
-- GET - Retrieving and compounding data from databases. Returning a list of the data of every credit stored in databases. 
+The main part of the application. It delegates tasks to other services and provides REST API for communication with the app from the outer world. May handle HTTP requests such as: 
+- GET - Retrieve and compound data from databases. Return a list of the data of every credit stored in databases. 
 - POST - Validate input and create new credit data. Delegate persisting in database certain parts of data to other services.
-- DELETE - Delete credit with the given ID.
+- DELETE - Delete every entry in databases respondent with the given Credit ID.
 
 ### Customer-service
 
@@ -138,7 +138,7 @@ May be requested only by credit-service, responsible for managing product entity
   <img src="https://github.com/psobow/microservices-app/blob/master/misc/architecture.png"/>
 </p>
 
-# Model data stored inside databases
+# Model entities stored inside databases
 #### Credit
 - **long** id
 - **String** creditName
@@ -171,6 +171,8 @@ May be requested only by credit-service, responsible for managing product entity
 
 # Application Testing
 Due to lack of spare time and insufficient knowledge od Docker, I did not manage to implement a satisfactory amount of unit test suites as well as integration test suites. Instead of testing application with JUnit and Mockito library, I decided to use a convenient tool [Postman](https://www.getpostman.com/), which appeared to be the best possible way to test genuine application behavior. 
+
+- You can get my neat postman-test-suite under this [link](https://www.getpostman.com/collections/155d9fd4b82b9288e689).
 
 
 

@@ -1,13 +1,14 @@
 package com.sobow.credit.microservice.dto;
 
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class CustomerDto
   private long creditId;
   
   @NotEmpty(message = "First name cannot be null or empty")
-  @Pattern(regexp = "^[^0-9]+$", message = "First name cannot contain digits")
+  @Pattern(regexp = "[A-Za-z]+", message = "First name can contain only letters")
   private String firstName;
   
   @NotEmpty(message = "PESEL cannot be null or empty")
@@ -27,7 +28,7 @@ public class CustomerDto
   private String pesel;
   
   @NotEmpty(message = "Surname cannot be null or empty")
-  @Pattern(regexp = "^[^0-9]+$", message = "Surname cannot contain digits")
+  @Pattern(regexp = "[A-Za-z]+", message = "Surname can contain only letters")
   private String surname;
 }
 
