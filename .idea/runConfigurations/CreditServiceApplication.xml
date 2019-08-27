@@ -6,6 +6,8 @@
     <envs>
       <env name="DB_HOST" value="127.0.0.1" />
       <env name="DB_PORT" value="3307" />
+      <env name="CUSTOMER_SERVICE_HOST" value="localhost" />
+      <env name="PRODUCT_SERVICE_HOST" value="localhost" />
     </envs>
     <method v="2">
       <option name="Make" enabled="true" />

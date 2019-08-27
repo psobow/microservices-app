@@ -44,6 +44,8 @@ services:
     environment:
       - DB_HOST=inteca-db
       - DB_PORT=3306
+      - CUSTOMER_SERVICE_HOST=customer-service
+      - PRODUCT_SERVICE_HOST=product-service
     command: mvn clean spring-boot:run
 
 

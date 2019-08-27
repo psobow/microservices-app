@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.sobow.credit.microservice.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,11 +27,15 @@ public class ProductClient
   private final RestTemplate restTemplate;
   private final Gson gson = new Gson();
   private final String productServicePort = "8082";
-  private final URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
-          "http://product-service:" + productServicePort + "/v1/products").build().encode().toUri();
+  @Value("${product.service.host}")
+  private String productServiceHost;
+  
   
   public void postProduct(final ProductDto productDto)
   {
+    URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
+        "http://" + productServiceHost + ":" + productServicePort + "/v1/products").build().encode().toUri();
+    
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> requestBody = new HttpEntity<>(gson.toJson(productDto), headers);
@@ -39,6 +44,9 @@ public class ProductClient
   
   public List<ProductDto> getProducts()
   {
+    URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
+        "http://" + productServiceHost + ":" + productServicePort + "/v1/products").build().encode().toUri();
+    
     try
     {
       ProductDto[] boardResponse = restTemplate.getForObject(productMicroServiceURL, ProductDto[].class);
@@ -53,6 +61,9 @@ public class ProductClient
   
   public void deleteProductByCreditId(final Long creditId)
   {
+    URI productMicroServiceURL = UriComponentsBuilder.fromHttpUrl(
+        "http://" + productServiceHost + ":" + productServicePort + "/v1/products").build().encode().toUri();
+    
     String entityUrl = productMicroServiceURL + "/" + creditId.toString();
     restTemplate.delete(entityUrl);
   }
