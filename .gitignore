@@ -5,6 +5,7 @@ inteca-db
 !**/src/main/**
 !**/src/test/**
 
+
 ### STS ###
 .apt_generated
 .classpath
@@ -15,7 +16,8 @@ inteca-db
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/*
+!.idea/runConfigurations/
 *.iws
 *.iml
 *.ipr

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="App" type="CompoundRunConfigurationType">
+    <toRun name="CustomerServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="CreditServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="ProductServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

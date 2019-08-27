@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CustomerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="customer-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.sobow.customer.CustomerServiceApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs>
+      <env name="DB_HOST" value="127.0.0.1" />
+      <env name="DB_PORT" value="3307" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
