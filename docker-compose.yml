@@ -41,6 +41,9 @@ services:
       - spring-network
     depends_on:
       - inteca-db
+    environment:
+      - DB_HOST=inteca-db
+      - DB_PORT=3306
     command: mvn clean spring-boot:run
 
 
@@ -55,6 +58,9 @@ services:
       - spring-network
     depends_on:
       - inteca-db
+    environment:
+      - DB_HOST=inteca-db
+      - DB_PORT=3306
     command: mvn clean spring-boot:run
 
   product-service:
@@ -68,5 +74,8 @@ services:
       - spring-network
     depends_on:
       - inteca-db
+    environment:
+      - DB_HOST=inteca-db
+      - DB_PORT=3306
     command: mvn clean spring-boot:run
 
